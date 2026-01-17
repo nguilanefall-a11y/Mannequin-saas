@@ -1,0 +1,14 @@
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/alpha/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/alpha/.gemini/antigravity/scratch/mannequin-saas/package-lock.json
+
+▲ Next.js 16.1.3 (Turbopack)
+- Local:         http://localhost:3005
+- Network:       http://192.168.1.152:3005
+- Environments: .env
+
+✓ Starting...
+✓ Ready in 415ms

@@ -1,0 +1,132 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 📁 TABLE 1 – MODELS
+model Model {
+  id              Int      @id @default(autoincrement())
+  
+  // Identité
+  prenom          String
+  nom             String
+  nomDeScene      String?
+  dateNaissance   DateTime
+  age             Int?
+  nationalite     String
+  statut          String   @default("INACTIF") // Replaced Enum with String
+  mineur          Boolean  @default(false)
+
+  // Coordonnées
+  email           String   @unique
+  telephone       String
+  adresse         String
+  ville           String
+  pays            String
+
+  // Mensurations
+  taille          Float
+  poids           Float
+  tourPoitrine    Float
+  tourTaille      Float
+  tourHanches     Float
+  pointure        Float
+  yeux            String
+  cheveux         String
+  
+  // New Enhanced Fields
+  specialites     String? // Comma-separated list
+  instagram       String?
+  tiktok          String?
+  followers       String? // e.g. "15k"
+  // photo field removed in favor of relation
+  
+  // Relations
+  bookings        Booking[]
+  documents       Document[]
+  photos          ModelPhoto[]
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model ModelPhoto {
+  id        Int      @id @default(autoincrement())
+  url       String
+  isMain    Boolean  @default(false)
+  modelId   Int
+  model     Model    @relation(fields: [modelId], references: [id])
+}
+
+// 📁 TABLE 2 – BOOKINGS
+model Booking {
+  id              Int      @id @default(autoincrement())
+  
+  // Relations
+  modelId         Int
+  model           Model    @relation(fields: [modelId], references: [id])
+  
+  clientId        Int
+  client          Client   @relation(fields: [clientId], references: [id])
+  
+  // Details
+  projet          String
+  date            DateTime
+  
+  // Finance
+  cachetBrut      Float
+  commission      Float    @default(20.0)
+  netModel        Float
+  
+  statut          String   @default("PREVU") // Replaced Enum with String
+
+  documents       Document[]
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// 📁 TABLE 3 – CLIENTS
+model Client {
+  id              Int      @id @default(autoincrement())
+  nomSociete      String
+  contact         String
+  email           String   @unique
+  telephone       String
+  adresse         String
+  siret           String
+  
+  bookings        Booking[]
+  documents       Document[]
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// 📁 TABLE 4 – DOCUMENTS
+model Document {
+  id              Int      @id @default(autoincrement())
+  type            String   // Replaced Enum with String
+  
+  // Relations
+  modelId         Int
+  model           Model    @relation(fields: [modelId], references: [id])
+  
+  clientId        Int?
+  client          Client?  @relation(fields: [clientId], references: [id])
+  
+  bookingId       Int?
+  booking         Booking? @relation(fields: [bookingId], references: [id])
+  
+  fichier         String
+  date            DateTime @default(now())
+  statut          String   @default("VALIDE") // Replaced Enum with String
+  dateExpiration  DateTime?
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
