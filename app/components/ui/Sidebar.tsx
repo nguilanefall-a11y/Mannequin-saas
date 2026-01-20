@@ -23,11 +23,11 @@ export default function Sidebar() {
         {/* LOGO */}
         <div className="mb-10 text-center">
           <Link href="/dashboard">
-            <h1 className="font-display text-3xl font-bold tracking-tight text-gradient-gold mb-1">
-              MANNEQUIN
+            <h1 className="font-display text-4xl font-black tracking-tighter text-black mb-1">
+              HOME<span className="text-gold-500">.</span>
             </h1>
-            <p className="text-[0.6rem] uppercase tracking-[0.2em] text-gray-400">
-              Agency Management
+            <p className="text-[0.6rem] uppercase tracking-[0.3em] text-gray-400">
+              Agency
             </p>
           </Link>
         </div>
