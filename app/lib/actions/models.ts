@@ -36,35 +36,44 @@ async function createModelFolderStructure(prenom: string, nom: string) {
   // TODO: Integrate with S3/Google Drive API here.
 }
 
-export async function createModel(data: any) {
-  // 1. Create Model
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
+
+export async function createModel(formData: FormData) {
+  // 1. Extract Data
+  const data = {
+    prenom: formData.get('prenom') as string,
+    nom: formData.get('nom') as string,
+    email: formData.get('email') as string,
+    dateNaissance: formData.get('dateNaissance') ? new Date(formData.get('dateNaissance') as string) : new Date(),
+    taille: parseFloat(formData.get('taille') as string || '0'),
+    poids: parseFloat(formData.get('poids') as string || '0'),
+    pointure: parseFloat(formData.get('pointure') as string || '0'),
+    // Default values for fields not yet in the form, to avoid DB errors if they are required
+    tourPoitrine: 0,
+    tourTaille: 0,
+    tourHanches: 0,
+    yeux: 'Non renseigné',
+    cheveux: 'Non renseigné',
+    ville: 'Paris',
+    pays: 'France',
+    nationalite: 'Française',
+    telephone: '',
+    adresse: '',
+    statut: 'INACTIF'
+  };
+
+  // 2. Create Model
   const model = await prisma.model.create({
-    data: {
-      prenom: data.prenom,
-      nom: data.nom,
-      // ... assume other fields mapping from input
-      email: data.email,
-      telephone: data.telephone,
-      adresse: data.adresse,
-      ville: data.ville,
-      pays: data.pays,
-      dateNaissance: new Date(data.dateNaissance),
-      nationalite: data.nationalite,
-      taille: parseFloat(data.taille),
-      poids: parseFloat(data.poids),
-      tourPoitrine: parseFloat(data.tourPoitrine),
-      tourTaille: parseFloat(data.tourTaille),
-      tourHanches: parseFloat(data.tourHanches),
-      pointure: parseFloat(data.pointure),
-      yeux: data.yeux,
-      cheveux: data.cheveux,
-    }
+    data: data
   });
 
-  // 2. Trigger Rule 4
+  // 3. Trigger Rule 4
   await createModelFolderStructure(model.prenom, model.nom);
 
-  return model;
+  // 4. Revalidate & Redirect
+  revalidatePath('/models');
+  redirect('/models');
 }
 
 export async function getModels() {
