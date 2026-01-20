@@ -35,11 +35,49 @@ const MOCK_COMPANIES: any[] = [
     { nomSociete: 'Dior', contact: 'Bureau Presse', email: 'presse@dior.com', telephone: '01 40 73 73 73', adresse: '30 Avenue Montaigne, 75008 Paris', siret: '552 065 187 00024' },
 ];
 
-export async function searchCompanies(query: string) {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 800));
+// Google Places API Integration
+const GOOGLE_PLACES_KEY = process.env.GOOGLE_PLACES_API_KEY;
 
+export async function searchCompanies(query: string) {
     if (!query) return [];
+
+    // 1. Try Google Places API if Key simulates
+    if (GOOGLE_PLACES_KEY && GOOGLE_PLACES_KEY.length > 5) {
+        try {
+            const response = await fetch('https://places.googleapis.com/v1/places:searchText', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Goog-Api-Key': GOOGLE_PLACES_KEY,
+                    'X-Goog-FieldMask': 'places.displayName,places.formattedAddress,places.internationalPhoneNumber,places.websiteUri'
+                },
+                body: JSON.stringify({
+                    textQuery: query,
+                    languageCode: 'fr'
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.places) {
+                return data.places.map((place: any) => ({
+                    nomSociete: place.displayName?.text || '',
+                    adresse: place.formattedAddress || '',
+                    telephone: place.internationalPhoneNumber || '',
+                    website: place.websiteUri || '',
+                    contact: '', // Google doesn't give specific contact names usually
+                    email: ''    // Google doesn't give emails aggressively
+                }));
+            }
+        } catch (error) {
+            console.error("Google Places API Error:", error);
+            // Fallback to mock if API fails
+        }
+    }
+
+    // 2. Fallback Mock Data (Simulated for Demo or if no Key)
+    // Simulate API delay only if we fell back
+    if (!GOOGLE_PLACES_KEY) await new Promise(resolve => setTimeout(resolve, 500));
 
     const lowerQ = query.toLowerCase();
     return MOCK_COMPANIES.filter(c => c.nomSociete.toLowerCase().includes(lowerQ));
