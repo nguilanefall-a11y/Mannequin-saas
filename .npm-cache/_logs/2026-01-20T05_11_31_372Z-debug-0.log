@@ -7,8 +7,8 @@
 6 silly config load:file:/usr/local/etc/npmrc
 7 verbose title npm exec prisma generate
 8 verbose argv "exec" "--" "prisma" "generate"
-9 verbose logfile logs-max:10 dir:/Users/alpha/.gemini/antigravity/scratch/mannequin-saas/.npm-cache/_logs/2026-01-20T04_47_54_288Z-
-10 verbose logfile /Users/alpha/.gemini/antigravity/scratch/mannequin-saas/.npm-cache/_logs/2026-01-20T04_47_54_288Z-debug-0.log
+9 verbose logfile logs-max:10 dir:/Users/alpha/.gemini/antigravity/scratch/mannequin-saas/.npm-cache/_logs/2026-01-20T05_11_31_372Z-
+10 verbose logfile /Users/alpha/.gemini/antigravity/scratch/mannequin-saas/.npm-cache/_logs/2026-01-20T05_11_31_372Z-debug-0.log
 11 silly logfile start cleaning logs, removing 1 files
 12 silly logfile done cleaning log files
 13 verbose cwd /Users/alpha/.gemini/antigravity/scratch/mannequin-saas
