@@ -40,11 +40,17 @@ export async function createBooking(data: any) {
 }
 
 export async function getBookings() {
-    return await prisma.booking.findMany({
-        include: {
-            model: true,
-            client: true
-        },
-        orderBy: { date: 'desc' }
-    });
+    try {
+        const bookings = await prisma.booking.findMany({
+            orderBy: { date: 'desc' },
+            include: {
+                model: true,
+                client: true
+            }
+        });
+        return bookings;
+    } catch (error) {
+        console.error("Error fetching bookings:", error);
+        return [];
+    }
 }

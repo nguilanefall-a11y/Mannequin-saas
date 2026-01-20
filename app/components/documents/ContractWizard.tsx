@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { generateContractPDF } from '../../lib/pdfGenerator';
 
 // --- MOCK DATA FOR TYPES (Static) ---
 const CONTRACT_TYPES = [
