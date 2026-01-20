@@ -10,6 +10,7 @@ export default function Sidebar() {
   const navItems = [
     { label: 'Vue d\'ensemble', href: '/dashboard' },
     { label: 'Modèles', href: '/models' },
+    { label: 'Clients', href: '/clients' },
     { label: 'Bookings', href: '/bookings' },
     { label: 'Documents', href: '/documents' },
     { label: 'Paramètres', href: '/settings' },
