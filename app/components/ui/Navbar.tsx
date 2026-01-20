@@ -5,7 +5,7 @@ import { SignedIn, SignedOut } from '@clerk/nextjs';
 
 export default function Navbar() {
     return (
-        <nav className="fixed w-full z-50 top-0 left-0 border-b border-white/5 backdrop-blur-md bg-[#0a0a0a]/50">
+        <nav className="fixed w-full z-50 top-0 left-0 bg-transparent">
             <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-2 group">
                     <span className="text-2xl font-display font-medium tracking-tight text-white group-hover:text-gold-500 transition-colors">HOME.</span>
