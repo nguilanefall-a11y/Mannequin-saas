@@ -3,7 +3,7 @@ import Navbar from './components/ui/Navbar';
 
 export default function LandingPage() {
     return (
-        <div className="min-h-screen bg-[#050505] text-white selection:bg-gold-500/30">
+        <div className="fixed inset-0 z-[100] overflow-y-auto w-full h-full bg-[#050505] text-white selection:bg-gold-500/30">
             <Navbar />
 
             {/* Hero Section */}
