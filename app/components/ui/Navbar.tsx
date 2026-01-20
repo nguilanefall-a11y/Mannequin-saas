@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { SignedIn, SignedOut } from '@clerk/nextjs';
 
 export default function Navbar() {
     return (
@@ -12,24 +11,13 @@ export default function Navbar() {
                 </Link>
 
                 <div className="flex items-center gap-8">
-                    <Link href="/features" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">
+                    <Link href="/features" className="text-xs font-medium uppercase tracking-widest text-white/60 hover:text-white transition-colors">
                         Fonctionnalités
                     </Link>
 
-                    <SignedIn>
-                        <Link href="/dashboard" className="text-sm font-medium text-white hover:text-gold-400 transition-colors border-l border-white/10 pl-8">
-                            Accéder au Dashboard
-                        </Link>
-                    </SignedIn>
-
-                    <SignedOut>
-                        <Link href="/sign-in" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
-                            Connexion
-                        </Link>
-                        <Link href="/sign-up" className="bg-white text-black px-6 py-2.5 rounded-full text-sm font-bold hover:bg-gray-200 transition-colors">
-                            Démarrer
-                        </Link>
-                    </SignedOut>
+                    <Link href="/sign-in" className="text-xs font-bold uppercase tracking-widest text-white hover:text-gold-500 transition-colors">
+                        Connexion
+                    </Link>
                 </div>
             </div>
         </nav>
