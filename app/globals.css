@@ -1,3 +1,43 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-gold-50: #fbf8f3;
+  --color-gold-100: #f5efe4;
+  --color-gold-200: #eaddc4;
+  --color-gold-300: #dec59d;
+  --color-gold-400: #d0a671;
+  --color-gold-500: #c58b4b;
+  --color-gold-600: #b9713d;
+  --color-gold-700: #9a5732;
+  --color-gold-800: #80482f;
+  --color-gold-900: #683c27;
+  --color-gold-950: #381e13;
+  
+  --font-display: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+  
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/70 backdrop-blur-xl border border-white/50 shadow-glass;
+  }
+  
+  .glass-button {
+    @apply bg-black/90 text-white backdrop-blur-md hover:bg-black/80 transition-all duration-300;
+  }
+  
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent bg-linear-to-r from-gold-600 via-gold-400 to-gold-600;
+  }
+}
+
+body {
+  @apply bg-[#FDFCF8] text-gray-900 font-sans antialiased;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(208, 166, 113, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(208, 166, 113, 0.10) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(208, 166, 113, 0.05) 0px, transparent 50%);
+  background-attachment: fixed;
+}

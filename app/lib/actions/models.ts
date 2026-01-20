@@ -1,7 +1,7 @@
 'use server'
 
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+import prisma from '../prisma';
+import { config } from '../config';
 
 // 📁 Rule 1: Activation Automatique
 // Checks if the model has all required VALID documents.

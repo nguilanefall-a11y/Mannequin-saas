@@ -10,6 +10,7 @@
     "gemini": "gemini -m gemini-3-pro-preview"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.36.8",
     "@libsql/client": "^0.17.0",
     "@prisma/adapter-libsql": "^7.2.0",
     "next": "16.1.3",

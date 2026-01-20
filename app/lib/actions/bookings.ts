@@ -1,7 +1,6 @@
 'use server'
 
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+import prisma from '../prisma';
 
 // 📁 Rule 2: Blocage Booking
 // Blocks booking creation if model is not ACTIF.
