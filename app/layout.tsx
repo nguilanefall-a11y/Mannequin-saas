@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || "pk_test_placeholder_for_build"}>
       <html lang="fr">
         <body className={`${inter.variable} ${playfair.variable} font-sans antialiased text-gray-900`}>
           <div className="flex min-h-screen">
